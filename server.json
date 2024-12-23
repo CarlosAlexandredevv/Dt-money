@@ -16,6 +16,15 @@
       "category": "Alimentação",
       "price": 50,
       "createdAt": "2024-12-23T14:30:02.625Z"
+    },
+
+    {
+      "id": 3,
+      "description": "Fb Uni",
+      "type": "outcome",
+      "category": "Faculdade",
+      "price": 1050,
+      "createdAt": "2024-12-23T14:30:02.625Z"
     }
   ]
 }
