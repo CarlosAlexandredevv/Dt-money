@@ -33,28 +33,12 @@
       "id": 4
     },
     {
-      "description": "teste",
-      "price": 10,
-      "category": "teste",
-      "type": "income",
-      "createdAt": "2024-12-26T13:22:52.373Z",
-      "id": 5
-    },
-    {
       "description": "Banana",
       "price": 10,
       "category": "Alimentação",
       "type": "outcome",
       "createdAt": "2024-12-26T13:24:29.237Z",
       "id": 6
-    },
-    {
-      "description": "testee",
-      "price": 321412,
-      "category": "teste",
-      "type": "income",
-      "createdAt": "2024-12-26T13:43:46.051Z",
-      "id": 7
     },
     {
       "description": "Pastel",
