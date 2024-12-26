@@ -8,7 +8,6 @@
       "price": 14000,
       "createdAt": "2024-12-23T14:55:02.625Z"
     },
-
     {
       "id": 2,
       "description": "Hamburguer",
@@ -17,7 +16,6 @@
       "price": 50,
       "createdAt": "2024-12-23T14:30:02.625Z"
     },
-
     {
       "id": 3,
       "description": "Fb Uni",
@@ -25,6 +23,30 @@
       "category": "Faculdade",
       "price": 1050,
       "createdAt": "2024-12-23T14:30:02.625Z"
+    },
+    {
+      "description": "Pizza",
+      "price": 44,
+      "category": "Alimentação",
+      "type": "outcome",
+      "createdAt": "2024-12-26T13:07:30.209Z",
+      "id": 4
+    },
+    {
+      "description": "teste",
+      "price": 10,
+      "category": "teste",
+      "type": "income",
+      "createdAt": "2024-12-26T13:22:52.373Z",
+      "id": 5
+    },
+    {
+      "description": "Banana",
+      "price": 10,
+      "category": "Alimentação",
+      "type": "outcome",
+      "createdAt": "2024-12-26T13:24:29.237Z",
+      "id": 6
     }
   ]
 }
