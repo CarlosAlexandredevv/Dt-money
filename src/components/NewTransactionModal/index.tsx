@@ -21,9 +21,15 @@ const newTransactionFormSchema = z.object({
   type: z.enum(['income', 'outcome']),
 });
 
-type NewTransactonFormInputs = z.infer<typeof newTransactionFormSchema>;
+type NewTransactionFormInputs = z.infer<typeof newTransactionFormSchema>;
 
-export function NewTransactionModal() {
+interface NewTransactionModalProps {
+  handleTransactionModalOpenChange: (status: boolean) => void;
+}
+
+export function NewTransactionModal({
+  handleTransactionModalOpenChange,
+}: NewTransactionModalProps) {
   const { createTransaction } = useContext(TransactionsContext);
   const {
     control,
@@ -31,11 +37,11 @@ export function NewTransactionModal() {
     handleSubmit,
     formState: { isSubmitting },
     reset,
-  } = useForm<NewTransactonFormInputs>({
+  } = useForm<NewTransactionFormInputs>({
     resolver: zodResolver(newTransactionFormSchema),
   });
 
-  async function handleCreateNewTransaction(data: NewTransactonFormInputs) {
+  async function handleCreateNewTransaction(data: NewTransactionFormInputs) {
     const { description, price, category, type } = data;
 
     await createTransaction({
@@ -44,7 +50,9 @@ export function NewTransactionModal() {
       category,
       type,
     });
+
     reset();
+    handleTransactionModalOpenChange(false);
   }
 
   return (
