@@ -1,3 +1,6 @@
+import { useContextSelector } from 'use-context-selector';
+import { useEffect, useState } from 'react';
+import { TransactionsContext } from '../../contexts/TransactionsContext';
 import { Header } from '../../components/Header';
 import { Summary } from '../../components/Summary';
 import { SearchForm } from './components/SearchForm';
@@ -6,18 +9,34 @@ import {
   TransactionsContainer,
   TransactionsTable,
 } from './styles';
-import { TransactionsContext } from '../../contexts/TransactionsContext';
+import { Pagination } from './components/Pagination';
 import { dateFormatter, princeFormatter } from '../../utils/formatter';
-import { useContextSelector } from 'use-context-selector';
-import { useEffect, useState } from 'react';
+
 import { CalendarBlank, TagSimple } from 'phosphor-react';
 
 export function Transactions() {
-  const transactions = useContextSelector(TransactionsContext, (context) => {
-    return context.transactions;
-  });
+  const transactions = useContextSelector(
+    TransactionsContext,
+    (ctx) => ctx.transactions,
+  );
+  const fetchTransactions = useContextSelector(
+    TransactionsContext,
+    (ctx) => ctx.fetchTransactions,
+  );
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    fetchTransactions(currentPage).then((response) => {
+      setTotalPages(Math.ceil(response.total / 10)); // Supondo que a resposta tenha um campo total com o número total de transações
+    });
+  }, [fetchTransactions, currentPage]);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -25,10 +44,7 @@ export function Transactions() {
     };
 
     window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   return (
@@ -40,26 +56,21 @@ export function Transactions() {
         style={{ display: windowWidth > 767 ? 'block' : 'none' }}
       >
         <SearchForm />
-
         <TransactionsTable>
           <tbody>
-            {transactions.map((transaction) => {
-              return (
-                <tr key={transaction.id}>
-                  <td width="50%">{transaction.description}</td>
-                  <td>
-                    <PriceHighlight variant={transaction.type}>
-                      {transaction.type === 'outcome' && '- '}
-                      {princeFormatter.format(transaction.price)}
-                    </PriceHighlight>
-                  </td>
-                  <td>{transaction.category}</td>
-                  <td>
-                    {dateFormatter.format(new Date(transaction.createdAt))}
-                  </td>
-                </tr>
-              );
-            })}
+            {transactions.map((transaction) => (
+              <tr key={transaction.id}>
+                <td width="50%">{transaction.description}</td>
+                <td>
+                  <PriceHighlight variant={transaction.type}>
+                    {transaction.type === 'outcome' && '- '}
+                    {princeFormatter.format(transaction.price)}
+                  </PriceHighlight>
+                </td>
+                <td>{transaction.category}</td>
+                <td>{dateFormatter.format(new Date(transaction.createdAt))}</td>
+              </tr>
+            ))}
           </tbody>
         </TransactionsTable>
       </TransactionsContainer>
@@ -102,49 +113,53 @@ export function Transactions() {
 
         <TransactionsTable>
           <tbody>
-            {transactions.map((transaction) => {
-              return (
-                <div className="card">
-                  <tr key={transaction.id}>
-                    <div className="description">
-                      <h2>{transaction.description}</h2>
-                      <p>
-                        <PriceHighlight variant={transaction.type}>
-                          {transaction.type === 'outcome' && '- '}
-                          {princeFormatter.format(transaction.price)}
-                        </PriceHighlight>
-                      </p>
-                    </div>
+            {transactions.map((transaction) => (
+              <div className="card" key={transaction.id}>
+                <tr>
+                  <div className="description">
+                    <h2>{transaction.description}</h2>
+                    <p>
+                      <PriceHighlight variant={transaction.type}>
+                        {transaction.type === 'outcome' && '- '}
+                        {princeFormatter.format(transaction.price)}
+                      </PriceHighlight>
+                    </p>
+                  </div>
 
-                    <div className="dateVenda">
-                      <td
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '0.4rem',
-                        }}
-                      >
-                        <TagSimple />
-                        {transaction.category}
-                      </td>
-                      <td
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '0.4rem',
-                        }}
-                      >
-                        <CalendarBlank />
-                        {dateFormatter.format(new Date(transaction.createdAt))}
-                      </td>
-                    </div>
-                  </tr>
-                </div>
-              );
-            })}
+                  <div className="dateVenda">
+                    <td
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.4rem',
+                      }}
+                    >
+                      <TagSimple />
+                      {transaction.category}
+                    </td>
+                    <td
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.4rem',
+                      }}
+                    >
+                      <CalendarBlank />
+                      {dateFormatter.format(new Date(transaction.createdAt))}
+                    </td>
+                  </div>
+                </tr>
+              </div>
+            ))}
           </tbody>
         </TransactionsTable>
       </TransactionsContainer>
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 }

@@ -25,28 +25,156 @@
       "createdAt": "2024-12-23T14:30:02.625Z"
     },
     {
-      "description": "Pizza",
-      "price": 44,
-      "category": "Alimentação",
+      "id": 4,
+      "description": "Viagem",
+      "price": 1000,
+      "category": "Viagem",
       "type": "outcome",
-      "createdAt": "2024-12-26T13:07:30.209Z",
-      "id": 4
+      "createdAt": "2024-12-26T23:32:20.577Z"
     },
     {
+      "id": 5,
       "description": "Banana",
+      "price": 432,
+      "category": "Alimentação",
+      "type": "outcome",
+      "createdAt": "2024-12-26T23:34:57.913Z"
+    },
+    {
+      "id": 7,
+      "description": "Compra de Livro",
+      "price": 150,
+      "category": "Educação",
+      "type": "outcome",
+      "createdAt": "2024-12-25T10:00:00.000Z"
+    },
+    {
+      "id": 8,
+      "description": "Venda de Software",
+      "price": 8000,
+      "category": "Venda",
+      "type": "income",
+      "createdAt": "2024-12-24T09:00:00.000Z"
+    },
+    {
+      "id": 9,
+      "description": "Café da Manhã",
+      "price": 20,
+      "category": "Alimentação",
+      "type": "outcome",
+      "createdAt": "2024-12-24T08:30:00.000Z"
+    },
+    {
+      "id": 10,
+      "description": "Manutenção do Carro",
+      "price": 3000,
+      "category": "Transporte",
+      "type": "outcome",
+      "createdAt": "2024-12-22T11:00:00.000Z"
+    },
+    {
+      "id": 11,
+      "description": "Consultoria",
+      "price": 5000,
+      "category": "Serviços",
+      "type": "income",
+      "createdAt": "2024-12-21T16:00:00.000Z"
+    },
+    {
+      "id": 12,
+      "description": "Cinema",
+      "price": 45,
+      "category": "Lazer",
+      "type": "outcome",
+      "createdAt": "2024-12-20T19:00:00.000Z"
+    },
+    {
+      "id": 13,
+      "description": "Salário",
+      "price": 12000,
+      "category": "Renda",
+      "type": "income",
+      "createdAt": "2024-12-20T08:00:00.000Z"
+    },
+    {
+      "id": 14,
+      "description": "Doação",
+      "price": 200,
+      "category": "Caridade",
+      "type": "outcome",
+      "createdAt": "2024-12-19T15:00:00.000Z"
+    },
+    {
+      "id": 15,
+      "description": "Curso Online",
+      "price": 400,
+      "category": "Educação",
+      "type": "outcome",
+      "createdAt": "2024-12-18T20:00:00.000Z"
+    },
+    {
+      "id": 16,
+      "description": "Freelance Design",
+      "price": 2500,
+      "category": "Trabalho",
+      "type": "income",
+      "createdAt": "2024-12-18T10:00:00.000Z"
+    },
+    {
+      "id": 17,
+      "description": "Conta de Energia",
+      "price": 600,
+      "category": "Contas",
+      "type": "outcome",
+      "createdAt": "2024-12-17T18:00:00.000Z"
+    },
+    {
+      "id": 18,
+      "description": "Internet",
+      "price": 120,
+      "category": "Contas",
+      "type": "outcome",
+      "createdAt": "2024-12-16T12:00:00.000Z"
+    },
+    {
+      "id": 19,
+      "description": "Notebook Novo",
+      "price": 4500,
+      "category": "Tecnologia",
+      "type": "outcome",
+      "createdAt": "2024-12-15T09:00:00.000Z"
+    },
+    {
+      "id": 20,
+      "description": "Venda de Curso",
+      "price": 3000,
+      "category": "Educação",
+      "type": "income",
+      "createdAt": "2024-12-14T13:00:00.000Z"
+    },
+    {
+      "description": "Comida",
       "price": 10,
       "category": "Alimentação",
       "type": "outcome",
-      "createdAt": "2024-12-26T13:24:29.237Z",
-      "id": 6
+      "createdAt": "2024-12-27T00:02:37.621Z",
+      "id": 21
     },
     {
-      "description": "Pastel",
-      "price": 5,
-      "category": "Alimentação",
+      "description": "Mentoria",
+      "price": 500,
+      "category": "Educação",
+      "type": "income",
+      "createdAt": "2024-12-27T00:03:13.746Z",
+      "id": 22
+    },
+    {
+      "description": "Role",
+      "price": 10,
+      "category": "Lazer",
       "type": "outcome",
-      "createdAt": "2024-12-26T13:44:48.964Z",
-      "id": 8
+      "createdAt": "2024-12-27T00:04:15.229Z",
+      "id": 23
     }
   ]
 }

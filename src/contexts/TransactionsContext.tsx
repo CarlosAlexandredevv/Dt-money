@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState, useCallback } from 'react';
+import { ReactNode, useState, useCallback } from 'react';
 import { api } from '../lib/axios';
 import { createContext } from 'use-context-selector';
 
@@ -20,7 +20,11 @@ interface CreateTransactionInput {
 
 interface TransactionContextType {
   transactions: Transaction[];
-  fetchTransactions: (query?: string) => Promise<void>;
+  fetchTransactions: (
+    page?: number,
+    limit?: number,
+    query?: string,
+  ) => Promise<{ total: number }>;
   createTransaction: (data: CreateTransactionInput) => Promise<void>;
 }
 
@@ -33,16 +37,22 @@ export const TransactionsContext = createContext({} as TransactionContextType);
 export function TransactionsProvider({ children }: TransactionsProviderProps) {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
-  const fetchTransactions = useCallback(async (query?: string) => {
-    const response = await api.get('/transactions', {
-      params: {
-        _sort: 'createdAt',
-        _order: 'desc',
-        q: query,
-      },
-    });
-    setTransactions(response.data);
-  }, []);
+  const fetchTransactions = useCallback(
+    async (page = 1, limit = 10, query?: string) => {
+      const response = await api.get('/transactions', {
+        params: {
+          _page: page,
+          _limit: limit,
+          _sort: 'createdAt',
+          _order: 'desc',
+          q: query,
+        },
+      });
+      setTransactions(response.data);
+      return { total: parseInt(response.headers['x-total-count'], 10) };
+    },
+    [],
+  );
 
   const createTransaction = useCallback(
     async (data: CreateTransactionInput) => {
@@ -56,13 +66,10 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
         createdAt: new Date(),
       });
       setTransactions((state) => [response.data, ...state]);
+      fetchTransactions(); // Atualiza a lista de transações após adicionar um novo item
     },
-    [],
+    [fetchTransactions],
   );
-
-  useEffect(() => {
-    fetchTransactions();
-  }, []);
 
   return (
     <TransactionsContext.Provider
